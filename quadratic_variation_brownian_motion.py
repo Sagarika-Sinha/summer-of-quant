@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+T=1
+dt=0.01
+N=int(T/dt)
+t=np.linspace(0,T,N)
+W1=np.cumsum(np.sqrt(dt)*np.random.randn(N))
+W2=np.cumsum(np.sqrt(dt)*np.random.randn(N))
+W3=np.cumsum(np.sqrt(dt)*np.random.randn(N))
+plt.figure(figsize=(10,5))
+plt.plot(t,W1,label='Path 1')
+plt.plot(t,W2,label='Path 2')
+plt.plot(t,W3,label='Path 3')
+plt.title("Brownian Motion Paths")
+plt.xlabel("Time")
+plt.ylabel("W(t)")
+plt.savefig("Plot 4")
+QV1 = np.cumsum(np.diff(W1)**2)
+QV2 = np.cumsum(np.diff(W2)**2)
+QV3 = np.cumsum(np.diff(W3)**2)
+t_qv = t[1:]
+plt.figure(figsize=(10, 5))
+plt.plot(t_qv, QV1, label='QV Path 1')
+plt.plot(t_qv, QV2, label='QV Path 2')
+plt.plot(t_qv, QV3, label='QV Path 3')
+plt.plot(t_qv, t_qv, 'k--', label='Theoretical QV = t')
+plt.title("Quadratic Variation")
+plt.xlabel("Time")
+plt.ylabel("Quadratic Variation")
+plt.savefig("Plot 5")
